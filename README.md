@@ -9,13 +9,13 @@ The bug was discovered by investigating a strong drop in precision for SNVs (~10
 With more testing using the HCC1395 somatic benchmark (https://pubmed.ncbi.nlm.nih.gov/34504347/) and sequencing data provided by the Somatic Mutation Working Group (Fudan University WES tumor-normal data set, 2 x 100x coverage), the drop in performance can be traced to changes between 4.1.8.1 and 4.1.9.0. 
 
 The reads were aligned to GRCh38.primary_assembly.genome:
-(http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz)[http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz]
+[http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz](http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz)
 
-The alignment was performed using (bwa)[https://github.com/lh3/bwa]:
+The alignment was performed using [bwa](https://github.com/lh3/bwa):
 `
 bwa mem -M -O 6 -A 1 -B 4 -t 7 -E 1 -k 19 
 `
-with a subsequent run of (picard MarkDuplicates)[https://broadinstitute.github.io/picard/].
+with a subsequent run of [picard MarkDuplicates](https://broadinstitute.github.io/picard/).
 
 The calling was done with essentially default parameters:
 ```
@@ -31,7 +31,7 @@ The performance metrics for selected GATK releases:
 ![FD_TN_4170_filter_FD_TN_4181_filter_FD_TN_4190_filter_FD_TN_4200_filter_FD_TN_4260_filter](figures/WES_FD_tn_default.png)
 
 Curiously, we do not observe such a substantial drop in precision in WGS data, neither in tumor-only nor in tumor-normal mode.
-In the foillowing, our "v04" corresponds to gatk 4.1.7.0 and out "v05" corresponds to gatk 4.2.6.0:
+In the foillowing, our "v04" corresponds to GATK 4.1.7.0 and out "v05" corresponds to GATK 4.2.6.0:
 
 Tumor-normal:
 
@@ -90,4 +90,4 @@ To generate the following figure, change to src/ and execute [plot_performance_m
 
 ## Original bug report
 
-See (https://github.com/broadinstitute/gatk/issues/7921)[https://github.com/broadinstitute/gatk/issues/7921]
+See [https://github.com/broadinstitute/gatk/issues/7921](https://github.com/broadinstitute/gatk/issues/7921)
