@@ -18,13 +18,11 @@ bwa mem -M -O 6 -A 1 -B 4 -t 7 -E 1 -k 19
 with a subsequent run of (picard MarkDuplicates)[https://broadinstitute.github.io/picard/].
 
 The calling was done with essentially default parameters:
-`
+```
 tools/gatk-${version}/gatk Mutect2  --normal-sample WES_FD_N --output $outvcf --intervals $wesbed  --interval-padding 0 --input $inbam_t --input $inbam_n --reference $ref
-`
-
-`
 tools/gatk-${version}/gatk FilterMutectCalls --output ${outvcf%.vcf}_filtered.vcf --variant $outvcf --intervals $wesbed --reference $ref --stats ${outvcf}.stats --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0
-`
+```
+
 
 som.py was used for calculating performance metrics.
 
@@ -51,46 +49,28 @@ Tumor-only:
 Aligned reads are available from Google Drive:
 
 Normal tissue:
-* (WES_FD_N.bam)[https://drive.google.com/file/d/1YYiALZeUjtpivCZlTQhrQejV8yiutfdl/view?usp=share_link]
-(WES_FD_N.bam.bai)[https://drive.google.com/file/d/1YYiALZeUjtpivCZlTQhrQejV8yiutfdl/view?usp=share_link]
+* [WES_FD_N.bam](https://drive.google.com/file/d/1YYiALZeUjtpivCZlTQhrQejV8yiutfdl/view?usp=share_link)
+* [WES_FD_N.bam.bai](https://drive.google.com/file/d/1YYiALZeUjtpivCZlTQhrQejV8yiutfdl/view?usp=share_link)
 
 Tumor tissue:
-* (WES_FD_T.bam)[https://drive.google.com/file/d/1KKwCGl3PZh6rmmj3xSlPuVum48QaqBPi/view?usp=share_link]
-* (WES_FD_T.bam.bai)[https://drive.google.com/file/d/1YYiALZeUjtpivCZlTQhrQejV8yiutfdl/view?usp=share_link]
+* [WES_FD_T.bam](https://drive.google.com/file/d/1KKwCGl3PZh6rmmj3xSlPuVum48QaqBPi/view?usp=share_link)
+* [WES_FD_T.bam.bai](https://drive.google.com/file/d/1YYiALZeUjtpivCZlTQhrQejV8yiutfdl/view?usp=share_link)
 
-Calling was performed with Mutect2 from various (releases of GATK)[https://github.com/broadinstitute/gatk/releases], for v4.1.8.1 and v4.1.9.0 specifically using the commands:
+Calling was performed with Mutect2 from various [releases of GATK](https://github.com/broadinstitute/gatk/releases), for v4.1.8.1 and v4.1.9.0 specifically using the commands:
 
-`
+```
 wesbed=intervals/S07604624_Covered_human_all_v6_plus_UTR.liftover.to.hg38_merged_allowed_contigs_intersect_HighConfidence.bed
-`
-
-`
 outvcf=vcfs/WES_FD_TN_4181.vcf.gz
-`
-
-`
 $tools/gatk-4.1.8.1/gatk Mutect2  --normal-sample WES_FD_N --output $outvcf  --intervals $wesbed   --interval-padding 0 --input $inbam_t --input $inbam_n --reference $ref
-`
-
-`
 $tools/gatk-4.1.8.1/gatk FilterMutectCalls  --output ${outvcf%.vcf.gz}_filtered.vcf.gz  --variant $outvcf --intervals $wesbed --reference $ref --stats ${outvcf}.stats --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0
-`
+```
 
-`
+```
 wesbed=intervals/S07604624_Covered_human_all_v6_plus_UTR.liftover.to.hg38_merged_allowed_contigs_intersect_HighConfidence.bed
-`
-
-`
 outvcf=vcfs/WES_FD_TN_4190.vcf.gz
-`
-
-`
 $tools/gatk-4.1.9.0/gatk Mutect2  --normal-sample WES_FD_N --output $outvcf  --intervals $wesbed   --interval-padding 0 --input $inbam_t --input $inbam_n --reference $ref
-`
-
-`
 $tools/gatk-4.1.9.0/gatk FilterMutectCalls  --output ${outvcf%.vcf.gz}_filtered.vcf.gz  --variant $outvcf --intervals $wesbed --reference $ref --stats ${outvcf}.stats --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0
-`
+```
 
 
 The output as vcf files are available here:
@@ -101,7 +81,7 @@ The combined (SNVs and INDELs) benchmark reference [benchmark/high-confidence_sS
 
 For reproducing performance metrics [callsets_performance/WES_FD_TN_4181_filter_som_py.stats.csv](callsets_performance/WES_FD_TN_4181_filter_som_py.stats.csv) and [callsets_performance/WES_FD_TN_4190_filter_som_py.stats.csv](callsets_performance/WES_FD_TN_4190_filter_som_py.stats.csv), change to src/ directory and:
 * install hap.py using [src/get_hap_py.sh](src/get_hap_py.sh)
-* get reference fasta using [src/get_hap_py.sh](src/get_reference_fasta.sh)
+* get reference fasta using [src/get_reference_fasta.sh](src/get_reference_fasta.sh)
 * run som.py using [src/run_callsets_performance.sh](src/run_callsets_performance.sh)
 
 To generate the following figure, change to src/ and execute [plot_performance_metrics.sh](src/plot_performance_metrics.sh).
