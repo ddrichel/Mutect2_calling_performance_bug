@@ -59,34 +59,47 @@ Tumor tissue:
 * (WES_FD_T.bam.bai)[https://drive.google.com/file/d/1YYiALZeUjtpivCZlTQhrQejV8yiutfdl/view?usp=share_link]
 
 Calling was performed with Mutect2 from various (releases of GATK)[https://github.com/broadinstitute/gatk/releases], for v4.1.8.1 and v4.1.9.0 specifically using the commands:
-`
-wesbed=intervals/S07604624_Covered_human_all_v6_plus_UTR.liftover.to.hg38_merged_allowed_contigs_intersect_HighConfidence.bed
-outvcf=vcfs/WES_FD_TN_4181.vcf.gz
-$tools/gatk-4.1.8.1/gatk Mutect2  --normal-sample WES_FD_N --output $outvcf  --intervals $wesbed   --interval-padding 0 --input $inbam_t --input $inbam_n --reference $ref
-$tools/gatk-4.1.8.1/gatk FilterMutectCalls  --output ${outvcf%.vcf.gz}_filtered.vcf.gz  --variant $outvcf --intervals $wesbed --reference $ref --stats ${outvcf}.stats --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0
-`
 
 `
 wesbed=intervals/S07604624_Covered_human_all_v6_plus_UTR.liftover.to.hg38_merged_allowed_contigs_intersect_HighConfidence.bed
+`
+`
+outvcf=vcfs/WES_FD_TN_4181.vcf.gz
+`
+`
+$tools/gatk-4.1.8.1/gatk Mutect2  --normal-sample WES_FD_N --output $outvcf  --intervals $wesbed   --interval-padding 0 --input $inbam_t --input $inbam_n --reference $ref
+`
+`
+$tools/gatk-4.1.8.1/gatk FilterMutectCalls  --output ${outvcf%.vcf.gz}_filtered.vcf.gz  --variant $outvcf --intervals $wesbed --reference $ref --stats ${outvcf}.stats --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0
+`
+`
+wesbed=intervals/S07604624_Covered_human_all_v6_plus_UTR.liftover.to.hg38_merged_allowed_contigs_intersect_HighConfidence.bed
+`
+`
 outvcf=vcfs/WES_FD_TN_4190.vcf.gz
+`
+`
 $tools/gatk-4.1.9.0/gatk Mutect2  --normal-sample WES_FD_N --output $outvcf  --intervals $wesbed   --interval-padding 0 --input $inbam_t --input $inbam_n --reference $ref
+`
+`
 $tools/gatk-4.1.9.0/gatk FilterMutectCalls  --output ${outvcf%.vcf.gz}_filtered.vcf.gz  --variant $outvcf --intervals $wesbed --reference $ref --stats ${outvcf}.stats --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0
 `
 
+
 The output as vcf files are available here:
-* (vcfs/WES_FD_TN_4181_filtered.vcf.gz)[vcfs/WES_FD_TN_4181_filtered.vcf.gz]
-* (vcfs/WES_FD_TN_4190_filtered.vcf.gz)[vcfs/WES_FD_TN_4181_filtered.vcf.gz]
+* [vcfs/WES_FD_TN_4181_filtered.vcf.gz](vcfs/WES_FD_TN_4181_filtered.vcf.gz)
+* [vcfs/WES_FD_TN_4190_filtered.vcf.gz](vcfs/WES_FD_TN_4181_filtered.vcf.gz)
 
-The combined (SNVs and INDELs) benchmark reference (benchmark/high-confidence_sSNV_sINDEL_in_HC_regions_v1.2.vcf.gz)[benchmark/high-confidence_sSNV_sINDEL_in_HC_regions_v1.2.vcf.gz] was created using (src/get_benchmark_calls.sh)[src/get_benchmark_calls.sh].
+The combined (SNVs and INDELs) benchmark reference [benchmark/high-confidence_sSNV_sINDEL_in_HC_regions_v1.2.vcf.gz](benchmark/high-confidence_sSNV_sINDEL_in_HC_regions_v1.2.vcf.gz) was created using [src/get_benchmark_calls.sh](src/get_benchmark_calls.sh).
 
-For reproducing performance metrics (callsets_performance/WES_FD_TN_4181_filter_som_py.stats.csv)[callsets_performance/WES_FD_TN_4181_filter_som_py.stats.csv] and (callsets_performance/WES_FD_TN_4190_filter_som_py.stats.csv)[callsets_performance/WES_FD_TN_4190_filter_som_py.stats.csv], change to src/ directory and:
-* install hap.py using (src/get_hap_py.sh)[src/get_hap_py.sh]
-* get reference fasta using (src/get_hap_py.sh)[src/get_reference_fasta.sh]
-* run som.py using (src/run_callsets_performance.sh)[src/run_callsets_performance.sh]
+For reproducing performance metrics [callsets_performance/WES_FD_TN_4181_filter_som_py.stats.csv](callsets_performance/WES_FD_TN_4181_filter_som_py.stats.csv) and [callsets_performance/WES_FD_TN_4190_filter_som_py.stats.csv](callsets_performance/WES_FD_TN_4190_filter_som_py.stats.csv), change to src/ directory and:
+* install hap.py using [src/get_hap_py.sh](src/get_hap_py.sh)
+* get reference fasta using [src/get_hap_py.sh](src/get_reference_fasta.sh)
+* run som.py using [src/run_callsets_performance.sh](src/run_callsets_performance.sh)
 
-To generate the following figure, change to src/ and execute (plot_performance_metrics.sh)[src/plot_performance_metrics.sh].
+To generate the following figure, change to src/ and execute [plot_performance_metrics.sh](src/plot_performance_metrics.sh).
 
-!(figures/WES_FD_TN_4181_filter_WES_FD_TN_4190_filter_.png)[figures/WES_FD_TN_4181_filter_WES_FD_TN_4190_filter_.png]
+![figures/WES_FD_TN_4181_filter_WES_FD_TN_4190_filter_.png](figures/WES_FD_TN_4181_filter_WES_FD_TN_4190_filter_.png)
 
 ## Original bug report
 
