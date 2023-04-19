@@ -22,7 +22,6 @@ SVR=matrix(nrow=length(args)-1,ncol=1)
 
 for(i in 1:(length(args)-1)){
 d=read.table(args[i], header=TRUE, stringsAsFactors=FALSE, sep=",")
-print(d)
     if("METRIC.Precision" %in% colnames(d)){
     SNVP[i,1]=d$METRIC.Precision[4]
     SNVR[i,1]=d$METRIC.Recall[4]
@@ -36,8 +35,7 @@ else if("precision" %in% colnames(d)){
     SVP[i,1]=d$precision[1]
 }
 }
-print(SVR)
-print(outnames)
+
 png(paste0("../figures/",outname,".png"), width=1400, height=960)
 par(mfrow=c(1,2), oma = c(0, 0, 10, 0))
 par(mar = c(22.1, 4.3, 10.3, 17.3), lwd = 2, cex.axis = 1.4)
