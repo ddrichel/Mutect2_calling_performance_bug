@@ -63,24 +63,31 @@ Calling was performed with Mutect2 from various (releases of GATK)[https://githu
 `
 wesbed=intervals/S07604624_Covered_human_all_v6_plus_UTR.liftover.to.hg38_merged_allowed_contigs_intersect_HighConfidence.bed
 `
+
 `
 outvcf=vcfs/WES_FD_TN_4181.vcf.gz
 `
+
 `
 $tools/gatk-4.1.8.1/gatk Mutect2  --normal-sample WES_FD_N --output $outvcf  --intervals $wesbed   --interval-padding 0 --input $inbam_t --input $inbam_n --reference $ref
 `
+
 `
 $tools/gatk-4.1.8.1/gatk FilterMutectCalls  --output ${outvcf%.vcf.gz}_filtered.vcf.gz  --variant $outvcf --intervals $wesbed --reference $ref --stats ${outvcf}.stats --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0
 `
+
 `
 wesbed=intervals/S07604624_Covered_human_all_v6_plus_UTR.liftover.to.hg38_merged_allowed_contigs_intersect_HighConfidence.bed
 `
+
 `
 outvcf=vcfs/WES_FD_TN_4190.vcf.gz
 `
+
 `
 $tools/gatk-4.1.9.0/gatk Mutect2  --normal-sample WES_FD_N --output $outvcf  --intervals $wesbed   --interval-padding 0 --input $inbam_t --input $inbam_n --reference $ref
 `
+
 `
 $tools/gatk-4.1.9.0/gatk FilterMutectCalls  --output ${outvcf%.vcf.gz}_filtered.vcf.gz  --variant $outvcf --intervals $wesbed --reference $ref --stats ${outvcf}.stats --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0
 `
@@ -99,7 +106,7 @@ For reproducing performance metrics [callsets_performance/WES_FD_TN_4181_filter_
 
 To generate the following figure, change to src/ and execute [plot_performance_metrics.sh](src/plot_performance_metrics.sh).
 
-![figures/WES_FD_TN_4181_filter_WES_FD_TN_4190_filter_.png](figures/WES_FD_TN_4181_filter_WES_FD_TN_4190_filter_.png)
+![figures/WES_FD_TN_4181_filter_WES_FD_TN_4190_filter.png](figures/WES_FD_TN_4181_filter_WES_FD_TN_4190_filter.png)
 
 ## Original bug report
 
