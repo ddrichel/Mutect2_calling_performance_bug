@@ -43,10 +43,9 @@ Tumor-only:
 ![WGS_FD_tumor_reference_workflow_v04_WGS_FD_tumor_reference_workflow_v05](figures/WGS_FD_tumor.png)
 
 
-## Reproducing the bug
+## Reproducing the bug 
 
-
-Aligned reads are available from Google Drive:
+For tumor-normal WES analysis, aligned reads are available from Google Drive:
 
 Normal tissue:
 * [WES_FD_N.bam](https://drive.google.com/file/d/1YYiALZeUjtpivCZlTQhrQejV8yiutfdl/view?usp=share_link)
